@@ -6,7 +6,7 @@ function BuscadorClima({formValue , handleKeyDown , handleSearch,  handleChange}
   
 
   return (
-    <div className='cardBuscador'>
+     
       <div className="input-wrapper">
       <Search 
             className="search-icon" 
@@ -20,10 +20,9 @@ function BuscadorClima({formValue , handleKeyDown , handleSearch,  handleChange}
           onKeyDown={handleKeyDown} // Trigger search on Enter key
           placeholder="Enter a city and a Country..."
           className="input"
-        />
-        
+        />        
       </div>
-    </div>
+    
   );
 }
 

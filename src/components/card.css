@@ -1,135 +1,114 @@
 #root {
-    min-height: 100vh;  
-    height: 100%;  
-    background-image: url('../assets/images/10default.jpg');  
-    background-repeat: no-repeat;  
-    background-size: cover;  
-    display: flex;  
-    justify-content: center;  
-    align-items: center;
-  
-  }
+  min-height: 100vh;  
+  height: 100%;     
 
-.backgroundContainer {
-    position: relative;
-    width: 95vw;
-    height: 95vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    overflow: hidden;
 }
 
-.weatherInfo {
-    max-width: 365px;      
+.card {  
+    max-width: 300px;  
+    min-width: 300px;   
     padding: 2em 1.5em;  
-    z-index: 2;    
-     background: transparent; 
-    backdrop-filter: brightness(1) blur(5px); 
-    -webkit-backdrop-filter: blur(10px);
-    padding: 2rem;
-    border-radius: 1.5em; 
-    box-shadow: 0 0 10px 0 #3089bc4a;     
+    background-color: #ffffff80;  
+    -webkit-backdrop-filter: brightness(1) blur(5px);  
+    backdrop-filter: brightness(1) blur(5px);  
+    border-radius: 1.5em;  
+    box-shadow: 0 0 10px 0 #3089bc4a;  
+    transition: box-shadow 0.25s;   
+    border-radius: 20px;
+    overflow: hidden;  
     color: greenyellow;
-    width: 90%;        
-}
-
+  }
  
-  .weatherInfo:hover {  
-    box-shadow: 0 0 25px 0 #3089bc4a;
+  .card:hover {  
+    box-shadow: 0 0 35px 0 #3089bc4a;  
+  }
+
+.card__headerContainer {
+  background-color: greenyellow;
+  color: white;
+  padding: 7px;
+  margin: -2rem 0rem 1rem -2rem; 
+  width: calc(100% + 3.1rem); 
+  text-align: center;
+  border-radius: 20px 20px 0 0 ;
+  top: 0
+}
+  
+  .card__title,  
+  .card__subtitle {  
+    text-align: center;
   
   }
 
-#weatherIcon {
-    width: 75px;
-    height: auto;
-}
-
-.valueMain {
-    font-size: 1.7rem;
-    text-align: center;
-    display: block;
-    margin: 1rem 0;
-}
-
-.additionalConditions {
-    background-color: #f5f5f5;
-    margin-top: 20px;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.additionalConditions h3 {    
-    padding: 8px 15px;
-    color: #666;
-    font-weight: bolder;
-    font-size: 17px;    
-    text-align: center;
-    margin: 0;
-}
-
-.conditionItem {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 15px;
-    border-bottom: 1px solid #e0e0e0;
-    background-color: white; /* Fondo translúcido similar a un vidrio */
-    backdrop-filter: blur(10px) brightness(1.1);            
-    
-}
-
-.conditionLabel {
-    color: #666;
-    
-    backdrop-filter: blur(10px) brightness(1.1);
-}
-
-
-.temperature {
-    font-size: 3.5rem;
-    text-align: center;
-    display: block;
-    margin: 1rem 0;
-}
-
-.headerContainer {
-    background-color: greenyellow;
-    color: white;
-    padding: 7px;
-    margin: -2rem 0rem 1rem -2rem; 
-    width: calc(100% + 3.1rem); 
-    text-align: center;
-    border-radius: 20px 20px 0 0 ;
-    top: 0
-
-}
-
-.afterTemp {
-    text-emphasis: inherit;
-    font-weight: bolder;
-    font-size: 1.1rem;
-    margin-left: -1.5em;
-}
-
-.card__fila{
+  .card__row{
     display: flex;
     align-items: center;
     padding: 0rem 3rem;
     margin: 0rem 3rem;
+}  
+
+.card__main {
+  font-size: 1.7rem;
+  text-align: center;
+  display: block;
+  margin: 1rem 0;
+}
+  
+  .card__body {
+    background-color: #f5f5f5;
+    margin-top: 20px;
+    border-radius: 4px;
+    overflow: hidden;
+    align-items: center;
 }
 
-button {
+
+.card__body h3 {    
+  padding: 8px 1px;
+  color: #666;
+  font-weight: bolder;
+  font-size: 17px;    
+  text-align: center;
+  margin: 0;
+}
+
+.card__weatherIcon {
+  width: 75px;
+  height: auto;
+}
+
+.card__conditionItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 15px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: white;            
+}
+
+.card__conditionLabel {
+  color: #666;    
+  backdrop-filter: blur(10px) brightness(1.1);
+}
+
+.card__temperature {
+  font-size: 3.5rem;
+  text-align: center;
+  display: block;
+  margin: 1rem 0;
+}
+  
+.card__afterTemp {
+  text-emphasis: inherit;
+  font-weight: bolder;
+  font-size: 1.1rem;
+  margin-left: -1.5em;
+}
+  
+  .card__button {  
     display: block;  
     margin: 0 auto;  
-    max-width: 340px;
-    width: 90%;
-    padding: 0.8rem;
-    margin-top: 1rem;
-    border: none;    
-    background-color: transparent;    
-    cursor: pointer;
-    -webkit-backdrop-filter: brightness(8) blur(20px); 
-    backdrop-filter: brightness(8) blur(20px);
-}
- 
+    background-color: #00000011;  
+    -webkit-backdrop-filter: brightness(1) blur(5px);  
+    backdrop-filter: brightness(1) blur(5px);
+  
+  }

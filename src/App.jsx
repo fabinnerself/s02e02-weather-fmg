@@ -1,5 +1,5 @@
 import BuscadorClima from './components/BuscadorClima'
-import ClimaCard1 from './components/ClimaCard1'
+import ClimaCard from './components/ClimaCard'
 import getFontImage from  './assets/js/funtions'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -125,8 +125,7 @@ function App() {
     console.log("nav ",navigator.geolocation)
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
-      console.log("lat ",latitude)
-      console.log("lon ",longitude)
+     
       setCoords({ latitude, longitude });
     }, (error) => {
       console.log('No aceptaste la ubicación');
@@ -143,8 +142,7 @@ function App() {
       console.log(url_temp)
       axios.get(url_temp)
         .then(res => {
-          const keys = Object.keys(conditionCodes);
-          
+          const keys = Object.keys(conditionCodes);          
 
           console.log("forecast ",res.data?.weather[0]?.main)
           
@@ -187,27 +185,10 @@ function App() {
  
   return (
      <>
-     <div className='wrapper'>
-        <div className='container'>
-        {/* <img 
-            src={fontImage}
-            alt="climate background" 
-            className="background" 
-            id="backgroundImage"
-        /> */}
-         
-          <div className='seek'>
-            <BuscadorClima formValue={formValue}  handleKeyDown={handleKeyDown} handleSearch={handleSearch} handleChange={handleChange}   />    
-          </div>
-          <div className='card'>
-            <ClimaCard1 datosClima={weather} />    
-          </div>
-      
-        
-        
-           </div>
-    </div>
-      
+     <div className='wrapper'>           
+        <BuscadorClima formValue={formValue}  handleKeyDown={handleKeyDown} handleSearch={handleSearch} handleChange={handleChange}   />
+        <ClimaCard datosClima={weather} />            
+    </div>      
      </>
   )
 }

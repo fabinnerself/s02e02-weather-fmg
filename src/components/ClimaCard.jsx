@@ -3,59 +3,58 @@ import './card.css'
 
 function ClimaCard({ datosClima }) {
 
-    const [isCelsius, setIsCelsius] = useState(true);
+    const [isCelsius, setIsCelsius] = useState(false);
 
-    const convertTemperature = (kelvin) => {
+    const convertTemperature = (fahren) => {
         if (isCelsius) {
-            
             return (
                 <span>
-                    {(kelvin - 273.15).toFixed(0)}° <span className="afterTemp">C</span>
+                    { parseInt((fahren * 9 / 5) + 32)}° <span className="card__afterTemp">F</span>
                 </span>
-            );
+            );            
         }
-        return (
+        return (                
             <span>
-                {(kelvin).toFixed(0)}° <span className="afterTemp">K</span>
-            </span>
-        );        
-    };      
+                { fahren ?  ((fahren).toFixed(0)) : (0) }° <span className="card__afterTemp">C</span>                
+            </span> 
+        );
+    };   
 
 return (
-<>{datosClima ? (<div className="backgroundContainer">    
-    <div id="weatherInfo">
-        <div className="headerContainer">
-            <h1>{datosClima?.name} - {datosClima.sys?.country}</h1>
-    </div>                            
-    <img 
-        src={datosClima.srcLink}   
-        alt="Weather icon" 
-        className="weatherIcon" 
-        id="weatherIcon"
-    />
-    <p className='valueMain'>"{datosClima?.weather[0].description}"</p>
-    <div className="additionalConditions">
-    <h3>CONDICIONES ADICIONALES</h3>
-    <div className="conditionItem">
-        <span className="conditionLabel">Viento:</span>
-        <span className="conditionValue">{datosClima?.wind.speed} <span className="unit"> m/s</span></span>
-    </div>
-    <div className="conditionItem">
-        <span className="conditionLabel">Nubosidad:</span>
-        <span className="conditionValue">{datosClima?.clouds.all}<span className="unit" > %</span></span>
-    </div>
-    <div className="conditionItem">
-        <span className="conditionLabel">Presión:</span>
-        <span className="conditionValue">{datosClima?.main.pressure} <span className="unit"> hPA</span></span>
-    </div>                       
+<>{datosClima ? (
+    <div className='card'>         
+        <div className="card__headerContainer">
+            <h1>{datosClima?.city} - {datosClima?.country}</h1>
+        </div>                  
+        <div className='card__row'>
+            <div><img 
+                src={datosClima?.icon}   
+                alt="Weather icon" 
+                className="card__weatherIcon"                             
+            /></div> 
+            <div><p className='card__main'>"{datosClima?.main}"</p></div>
+        </div>          
+            <div className="card__body">            
+                <h3>ADITIONAL CONDITIONS </h3>
+                <div className="card__conditionItem">
+                    <span className="card__conditionLabel">Wind:</span>
+                    {datosClima?.wind}   m/s 
+                </div>
+                <div className="card__conditionItem">
+                    <span className="card__conditionLabel">Cloud:</span>
+                    {datosClima?.clouds}  % 
+                </div>
+                <div className="card__conditionItem">
+                    <span className="card__conditionLabel">Pression:</span>
+                    {datosClima?.pressure}   hPA  
+                </div>                   
+            </div>    
+    <p> <span className="card__temperature" > {convertTemperature(datosClima?.temperature)} </span> </p> 
+    <button  className='card__button' onClick={() => setIsCelsius(!isCelsius)} id="changeTemp">  Change to {!isCelsius ? '°Fahrenheit' : '°Celsius'} </button>       
 </div>
+ 
 
-    <p> <span className="temperature" id="temperature"> {convertTemperature(datosClima?.main.temp)} </span> </p> 
-    <button  onClick={() => setIsCelsius(!isCelsius)} id="changeTemp">  Cambiar a {isCelsius ? '°Kelvin' : '°Celsius'} </button>       
-</div>
-</div> 
-
-) : (<div>no se puedieron cargar los datos de la tarjeta</div>)}
+) : (<div>no se puedieron cargar los datos de la tarjeta- </div>)}
  </>  
     
   )
