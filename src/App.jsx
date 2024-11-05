@@ -1,8 +1,6 @@
 import BuscadorClima from './components/BuscadorClima'
 import ClimaCard from './components/ClimaCard'
-import getFontImage from  './assets/js/funtions'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState , useEffect} from 'react'
 import axios from 'axios';
 import './app.css'
 
@@ -28,6 +26,24 @@ import {
   mistF,
   defaultF
 } from './assets/images/indexFont.js';
+
+
+const weatherImageMap = {
+  'clear': clearF,
+  'clear sky': clearF,
+  'few clouds': fcloudsF,
+  'clouds': fcloudsF,
+  'scattered clouds': scloudsF,
+  'broken clouds': bcloudsF,
+  'shower rain': srainF,
+  'rain': rainF,
+  'thunderstorm': tstormF,
+  'snow': snowF,
+  'mist': mistF,
+  'default': defaultF
+};
+
+
 
 const key = '5f8142e5c82e1f550bb530edc710a652';
 const url = 'https://api.openweathermap.org/data/2.5/weather';
@@ -59,17 +75,28 @@ const icons = {
   clouds: cloudSvg
 };
  
- 
 
 
 function App() {  
 
+
   const [formValue, setFormValue] = useState("");
   const [search, setSearch] = useState("La Paz, Bolivia");
-  const [fontImage, setFontImage] = useState(defaultF);  
+  const [fontImage, setFontImage] = useState(fcloudsF);  
 
   const [coords, setCoords] = useState(initialState);
   const [weather, setWeather] = useState({});  
+
+  function changeImageWeather(weatherDesc) {
+    console.log("int ")
+    
+    const imageName = weatherImageMap[weatherDesc.toLowerCase()] || weatherImageMap['default'];
+    
+    console.log("imagename ", imageName)
+    setFontImage(imageName)
+     
+  }
+
 
   const handleSearch = () => {    
     
@@ -87,6 +114,8 @@ function App() {
 
         const keys = Object.keys(conditionCodes);
         const iconName = keys.find(key => conditionCodes[key].includes(data?.weather[0]?.id));
+
+        changeImageWeather(data?.weather[0]?.main)
 
         setWeather({
           city: data?.name.toUpperCase(),
@@ -147,16 +176,7 @@ function App() {
           console.log("forecast ",res.data?.weather[0]?.main)
           
           const iconName = keys.find(key => conditionCodes[key].includes(res.data?.weather[0]?.id));
-          const imageNameFont = getFontImage(res.data?.weather[0]?.main);
-          console.log("res img ",imageNameFont)
-
-          if(imageNameFont)
-            setFontImage(imageNameFont)
-          else
-            setFontImage(defaultF)
-
-          let aux_temp = parseInt(res.data?.main?.temp - 273.15)
-          console.log(aux_temp)
+         
   
           setWeather({
             city: res.data?.name.toUpperCase(),
@@ -168,6 +188,8 @@ function App() {
             pressure: res.data?.main?.pressure,
             temperature: parseInt(res.data?.main?.temp - 273.15)
           });
+
+          changeImageWeather(res.data?.weather[0]?.main)
         })
         .catch(err => {
           console.log(err);
@@ -184,10 +206,12 @@ function App() {
   
  
   return (
-     <>
-     <div className='wrapper'>           
+     < >
+      <div className='wrapper'  style={{ backgroundImage: `url('${fontImage}')`}} >
+      <div className='container'   >        
         <BuscadorClima formValue={formValue}  handleKeyDown={handleKeyDown} handleSearch={handleSearch} handleChange={handleChange}   />
         <ClimaCard datosClima={weather} />            
+        </div>      
     </div>      
      </>
   )
