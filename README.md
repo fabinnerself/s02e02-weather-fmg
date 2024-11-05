@@ -118,7 +118,7 @@ cd  s02e02-weather-fmg
 
 npm install
 
-npm pm install lucide-react
+npm install lucide-react
 
 npm i axios
 
